@@ -1,0 +1,15 @@
+.btn-clear{
+    color: red;
+    background-color: inherit;
+}
+/* .btn-clear:hover{
+    text-decoration: underline;
+ 
+} */
+.todo-footer{
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 15px ;
+}

@@ -1,0 +1,25 @@
+.btn-block{
+    float: right;
+}
+.todo-list-item-label{
+    position: relative;
+    left: 30px;
+    /* bottom: 4px; */
+
+}
+.todo_list-item-icon{
+    color: rgba(227, 6, 6, 0.521);
+    transition: 0.2s;
+}
+.todo_list-item-icon:hover{
+    color: rgba(227, 0, 0, 0.916);
+}
+.btn-block button{
+    background-color: inherit;
+    border: none;
+}
+.todo-list-item-time{
+    font-size: 10px;
+    position: relative;
+    top: 8px;
+}

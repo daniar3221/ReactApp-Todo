@@ -1,0 +1,15 @@
+
+.todo-footer-filter button{
+    border: 2px solid inherit;
+    background-color: inherit;
+    margin: 5px;
+    
+}
+
+.todo-footer-filter btn.active{
+    background-color: rgb(224, 6, 6);
+    color: white;
+    outline: none;
+}
+
+
