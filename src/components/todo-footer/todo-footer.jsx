@@ -30,8 +30,8 @@ TodoFooter.defaultProps = {
 
 TodoFooter.propTypes = {
   itemsLeft: PropTypes.number,
-  actualButton: PropTypes.func,
-  deleteAllCompleted: PropTypes.func
+  actualButton: PropTypes.func.isRequired,
+  deleteAllCompleted: PropTypes.func.isRequired,
 };
 
 export default TodoFooter;

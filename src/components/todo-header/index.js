@@ -1,3 +1,3 @@
-import TodoHeader from './todo-header';
+import TodoHeader from './todo-header.jsx';
 
 export default TodoHeader;

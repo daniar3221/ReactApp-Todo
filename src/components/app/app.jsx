@@ -7,8 +7,8 @@ import TodoList from '../todo-list';
 import TodoFooter from '../todo-footer';
 
 export default class App extends Component {
-  
   maxId = 100;
+
   state = {
     todoData: [
       {
@@ -32,9 +32,17 @@ export default class App extends Component {
         date: new Date(),
         done: false,
       },
+      {
+        id: 4,
+        value: 'Learn React',
+        editing: false,
+        date: new Date('2022-07-28'),
+        done: false,
+      },
     ],
     actualButton: 'all',
   };
+
   deleteItem = (id) => {
     this.setState(({ todoData }) => {
       const idx = todoData.findIndex((item) => item.id === id);
@@ -47,6 +55,7 @@ export default class App extends Component {
       };
     });
   };
+
   changeItemText = (text, id) => {
     this.setState(({ todoData }) => {
       const editingItem = todoData.find((item) => item.id === id);
@@ -64,6 +73,7 @@ export default class App extends Component {
       };
     });
   };
+
   changeEditStatusItem = (id) => {
     this.setState(({ todoData }) => {
       const editingItem = todoData.find((item) => item.id === id);
@@ -80,6 +90,7 @@ export default class App extends Component {
       };
     });
   };
+
   deleteAllCompleted = () => {
     this.setState(({ todoData }) => {
       const completedTasks = todoData.filter((item) => !item.done);
@@ -88,11 +99,13 @@ export default class App extends Component {
       };
     });
   };
+
   changeActualButton = (actBtn) => {
     this.setState({
       actualButton: actBtn,
     });
   };
+
   addItem = (value) => {
     this.setState(({ todoData }) => {
       const newItem = {
@@ -111,6 +124,7 @@ export default class App extends Component {
       };
     });
   };
+
   changeDoneItem = (id) => {
     this.setState(({ todoData }) => {
       const changingItem = todoData.find((item) => item.id === id);
@@ -128,9 +142,8 @@ export default class App extends Component {
       };
     });
   };
-  
+
   render() {
-    
     const { todoData, actualButton } = { ...this.state };
 
     const leftCount = todoData.filter((item) => item.done !== true).length;

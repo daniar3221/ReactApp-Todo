@@ -2,29 +2,30 @@ import React, { Component } from 'react';
 import './editing-input.css';
 import PropTypes from 'prop-types';
 
-
 export default class EditingInput extends Component {
-
-  state = {
-    value: this.props.itemText,
-  };
-  
-  onLabelChange = (e) => {
-    this.setState({
-      value: e.target.value,
-    });
-  };
-  onSubmit = (e) => {
-    e.preventDefault();
-    this.props.editItemText(this.state.value, this.props.itemId);
-    this.setState({
-      value: '',
-    });
-  };
+  constructor({ itemText, itemId, editItemText }) {
+    super();
+    this.state = {
+      value: itemText,
+    };
+    this.onSubmit = (e) => {
+      e.preventDefault();
+      // КАК ДЕСТРУКТУРИЗИРОВАТЬ ТУТ
+      // eslint-disable-next-line react/destructuring-assignment
+      editItemText(this.state.value, itemId);
+      this.setState({
+        value: '',
+      });
+    };
+    this.onLabelChange = (e) => {
+      this.setState({
+        value: e.target.value,
+      });
+    };
+  }
 
   render() {
-    // const { itemText, itemId, editItemText } = this.props
-    const { value } = this.state
+    const { value } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
         <input

@@ -3,7 +3,6 @@ import './todo-footer-filter.css';
 import PropTypes from 'prop-types';
 
 export default class TodoFooterFilter extends Component {
- 
   changeActiveStyle = (indexButton) => {
     this.buttons = document.querySelectorAll('.btn-filter');
     const btnArr = [...this.buttons];
@@ -12,7 +11,6 @@ export default class TodoFooterFilter extends Component {
   };
 
   render() {
-    
     const { actualButton } = this.props;
 
     return (
@@ -53,5 +51,5 @@ export default class TodoFooterFilter extends Component {
 }
 
 TodoFooterFilter.propTypes = {
-  actualButton: PropTypes.func
-}
+  actualButton: PropTypes.func.isRequired,
+};

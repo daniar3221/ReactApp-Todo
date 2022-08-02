@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -7,13 +10,13 @@ import TodoListItem from '../todo-list-item';
 import './todo-list.css';
 
 export default class TodoList extends Component {
+  // eslint-disable-next-line consistent-return
   render() {
     const {
       todos, onDone, onEdit, onDelete, actualMode, changeItemText,
     } = this.props;
 
     if (actualMode === 'all') {
-    
       const elements = todos.map((item) => {
         if (item.editing) {
           return (
@@ -42,6 +45,7 @@ export default class TodoList extends Component {
             <TodoListItem
               onEdit={(id) => onEdit(id)}
               onDelete={(id) => onDelete(id)}
+              // eslint-disable-next-line react/jsx-props-no-spreading
               {...item}
             />
           </li>
@@ -60,6 +64,7 @@ export default class TodoList extends Component {
 
             <li key={item.id} className="editing-li">
               <EditingInput
+                itemText={item.value}
                 itemId={item.id}
                 editItemText={(text, id) => changeItemText(text, id)}
               />
@@ -99,6 +104,7 @@ export default class TodoList extends Component {
 
             <li key={item.id} className="editing-li">
               <EditingInput
+                itemText={item.value}
                 itemId={item.id}
                 editItemText={(text, id) => changeItemText(text, id)}
               />
@@ -141,7 +147,14 @@ TodoList.defaultProps = {
 };
 
 TodoList.propTypes = {
-  todos: PropTypes.array,
+  todos: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    value: PropTypes.string,
+    editing: PropTypes.bool,
+    // eslint-disable-next-line react/forbid-prop-types
+    date: PropTypes.any,
+    done: PropTypes.bool,
+  })),
   onDone: PropTypes.func,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,

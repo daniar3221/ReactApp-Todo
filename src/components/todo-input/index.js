@@ -1,3 +1,3 @@
-import TodoInput from './todo-input';
+import TodoInput from './todo-input.jsx';
 
 export default TodoInput;

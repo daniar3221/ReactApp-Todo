@@ -1,6 +1,7 @@
 import React from 'react';
 import './todo-list-item.css';
 import { formatDistance } from 'date-fns';
+import PropTypes from 'prop-types';
 
 function TodoListItem({
   value, date, done, onDelete, onEdit, id,
@@ -47,5 +48,19 @@ function TodoListItem({
     </span>
   );
 }
+
+TodoListItem.defaultProps = {
+  date: new Date(),
+};
+
+TodoListItem.propTypes = {
+  value: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  date: PropTypes.instanceOf(Date),
+  done: PropTypes.bool.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+};
 
 export default TodoListItem;
