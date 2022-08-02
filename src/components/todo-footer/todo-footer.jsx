@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import TodoFooterFilter from '../todo-footer-filter/todo-footer-filter';
+import TodoFooterFilter from '../todo-footer-filter/todo-footer-filter.jsx';
 import './todo-footer.css';
 
 function TodoFooter({ itemsLeft, actualButton, deleteAllCompleted }) {
