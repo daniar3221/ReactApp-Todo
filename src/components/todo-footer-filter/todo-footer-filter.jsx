@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import './todo-footer-filter.css';
+import PropTypes from 'prop-types';
 
 export default class TodoFooterFilter extends Component {
-  constructor() {
-    super();
-
-    this.changeActiveStyle = (indexButton) => {
-      this.buttons = document.querySelectorAll('.btn-filter');
-      const btnArr = [...this.buttons];
-      btnArr.map((item) => item.classList.remove('active'));
-      btnArr[indexButton].classList.add('active');
-    };
-  }
+ 
+  changeActiveStyle = (indexButton) => {
+    this.buttons = document.querySelectorAll('.btn-filter');
+    const btnArr = [...this.buttons];
+    btnArr.map((item) => item.classList.remove('active'));
+    btnArr[indexButton].classList.add('active');
+  };
 
   render() {
+    
     const { actualButton } = this.props;
 
     return (
@@ -51,4 +50,8 @@ export default class TodoFooterFilter extends Component {
       </span>
     );
   }
+}
+
+TodoFooterFilter.propTypes = {
+  actualButton: PropTypes.func
 }
