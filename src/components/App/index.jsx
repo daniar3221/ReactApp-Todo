@@ -27,13 +27,6 @@ export default class App extends Component {
         id: '3',
         value: 'Build Todo Project',
         editing: false,
-        date: new Date(),
-        done: false,
-      },
-      {
-        id: '4',
-        value: 'Learn React',
-        editing: false,
         date: new Date('2022-07-28'),
         done: false,
       },
