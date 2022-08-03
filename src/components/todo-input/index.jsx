@@ -15,9 +15,7 @@ export default class TodoInput extends Component {
     };
     this.onSubmit = (e) => {
       e.preventDefault();
-      // КАК ТУТ ДЕСТРУКТУРИЗИРОВАТЬ
-      // eslint-disable-next-line react/destructuring-assignment
-      getValue(this.state.value);
+      if (this.state.value.trim() !== '') getValue(this.state.value.trim());
       this.setState({
         value: '',
       });

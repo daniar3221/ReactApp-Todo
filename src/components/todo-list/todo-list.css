@@ -1,6 +1,4 @@
-.editing-input{
-    width: 100%;    
-}
+
 ul {
     list-style-type: none;
 }
@@ -20,6 +18,7 @@ ul {
     float: right;
 }
 .editing-li{
+  position: relative;
    width: 99.9%;
     background-color: rgb(255, 255, 255);
 }
@@ -68,3 +67,17 @@ ul {
   .round input[type="checkbox"]:checked + label:after {
     opacity: 1;
   }
+
+.check-button{
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  border: none;
+  background-color: inherit;
+  color: rgba(255, 0, 0, 0.548);
+  transition: 0.5s;
+}
+.check-button:hover{
+  color: rgba(255, 0, 0, 0.989);
+  transform: scale(1.2);
+}

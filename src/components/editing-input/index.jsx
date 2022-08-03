@@ -8,10 +8,15 @@ export default class EditingInput extends Component {
     this.state = {
       value: itemText,
     };
-    this.onSubmit = (e) => {
-      e.preventDefault();
-      // КАК ДЕСТРУКТУРИЗИРОВАТЬ ТУТ
-      // eslint-disable-next-line react/destructuring-assignment
+    this.onSubmitEnter = (e) => {
+      if (e.key === 'Enter') {
+        editItemText(this.state.value, itemId);
+        this.setState({
+          value: '',
+        });
+      }
+    };
+    this.onSubmitButton = () => {
       editItemText(this.state.value, itemId);
       this.setState({
         value: '',
@@ -27,14 +32,19 @@ export default class EditingInput extends Component {
   render() {
     const { value } = this.state;
     return (
-      <form onSubmit={this.onSubmit}>
+      <div>
         <input
+          onKeyDown={this.onSubmitEnter}
           onChange={this.onLabelChange}
           className="editing-input"
           placeholder="Type something to change..."
           value={value}
         />
-      </form>
+        <button type='button' className='check-button'
+        onClick={this.onSubmitButton}>
+                <i className="fa-solid fa-check" />
+        </button>
+      </div>
     );
   }
 }
@@ -47,6 +57,6 @@ EditingInput.defaultProps = {
 
 EditingInput.propTypes = {
   itemText: PropTypes.string,
-  itemId: PropTypes.number,
+  itemId: PropTypes.string,
   editItemText: PropTypes.func,
 };

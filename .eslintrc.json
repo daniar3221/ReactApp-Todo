@@ -18,6 +18,14 @@
         "react"
     ],
     "rules": {
-        "no-plusplus":"off"
+        "no-plusplus": "off"
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx"],
+                "moduleDirectory": ["node_modules", "src/"]
+            }
+        }
     }
 }

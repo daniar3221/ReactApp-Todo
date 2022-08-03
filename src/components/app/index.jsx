@@ -1,39 +1,37 @@
 import React, { Component } from 'react';
 
 import './app.css';
-import TodoHeader from '../todo-header';
-import TodoInput from '../todo-input';
-import TodoList from '../todo-list';
-import TodoFooter from '../todo-footer';
+import TodoHeader from '../Todo-header';
+import TodoInput from '../Todo-input';
+import TodoList from '../Todo-list';
+import TodoFooter from '../Todo-footer';
 
 export default class App extends Component {
-  maxId = 100;
-
   state = {
     todoData: [
       {
-        id: 1,
+        id: '1',
         value: 'Drink coffee',
         editing: false,
         date: new Date('2022-06-01'),
         done: false,
       },
       {
-        id: 2,
+        id: '2',
         value: 'Make a lunch',
         editing: false,
         date: new Date('2022-07-26'),
         done: false,
       },
       {
-        id: 3,
+        id: '3',
         value: 'Build Todo Project',
         editing: false,
         date: new Date(),
         done: false,
       },
       {
-        id: 4,
+        id: '4',
         value: 'Learn React',
         editing: false,
         date: new Date('2022-07-28'),
@@ -55,6 +53,14 @@ export default class App extends Component {
       };
     });
   };
+
+  // makeId = (id) => {
+  //   const newId = id + 1;
+  //   this.setState(({
+  //     id: newId,
+  //   }));
+  //   return newId;
+  // };
 
   changeItemText = (text, id) => {
     this.setState(({ todoData }) => {
@@ -109,7 +115,7 @@ export default class App extends Component {
   addItem = (value) => {
     this.setState(({ todoData }) => {
       const newItem = {
-        id: this.maxId++,
+        id: Date.now().toString(),
         value,
         editing: false,
         date: new Date(),

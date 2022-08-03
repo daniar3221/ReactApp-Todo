@@ -1,15 +1,13 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable consistent-return */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import EditingInput from '../editing-input';
-import TodoListItem from '../todo-list-item';
+import EditingInput from '../Editing-input';
+import TodoListItem from '../Todo-list-item';
 
 import './todo-list.css';
 
 export default class TodoList extends Component {
-  // eslint-disable-next-line consistent-return
   render() {
     const {
       todos, onDone, onEdit, onDelete, actualMode, changeItemText,
@@ -147,7 +145,7 @@ TodoList.defaultProps = {
 
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     value: PropTypes.string,
     editing: PropTypes.bool,
     // eslint-disable-next-line react/forbid-prop-types
