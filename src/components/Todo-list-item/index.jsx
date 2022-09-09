@@ -16,7 +16,7 @@ class TodoListItem extends Component {
   };
 
   itemStyle = (done) => ({
-    fontSize: '20px',
+    fontSize: '17px',
     textDecoration: done ? 'line-through' : 'none',
   });
 

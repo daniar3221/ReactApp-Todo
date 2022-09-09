@@ -2,9 +2,12 @@
     float: right;
 }
 .todo-list-item-label{
+    display: inline-block;
     position: relative;
     left: 30px;
-    /* bottom: 4px; */
+    width: 30%;
+    overflow: hidden;
+    bottom: -4px;
 
 }
 .todo_list-item-icon{

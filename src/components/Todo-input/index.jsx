@@ -54,6 +54,7 @@ export default class TodoInput extends Component {
 
     this.onSubmit = (e) => {
       if (e.key === 'Enter') {
+        if (!this.state.value) return;
         e.preventDefault();
         getValue(this.state);
         this.setState({
@@ -76,6 +77,7 @@ export default class TodoInput extends Component {
         onKeyDown={this.onSubmit}
       >
         <input
+          maxLength={23}
           className="todo-input"
           placeholder="What's need to be done ?"
           onChange={this.onLabelChange}
@@ -83,6 +85,12 @@ export default class TodoInput extends Component {
         />
 
          <input type="text"
+         maxLength={2}
+         onKeyPress={(event) => {
+           if (!/[0-9]/.test(event.key)) {
+             event.preventDefault();
+           }
+         }}
          className='todo-input-min'
          placeholder='Min'
          onChange={this.onMinutesChange}
@@ -90,6 +98,12 @@ export default class TodoInput extends Component {
          />
 
         <input type="text"
+        maxLength={2}
+        onKeyPress={(event) => {
+          if (!/[0-9]/.test(event.key)) {
+            event.preventDefault();
+          }
+        }}
          className='todo-input-sec'
          placeholder='Sec'
          onChange={this.onSecondsChange}
