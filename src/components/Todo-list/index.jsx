@@ -9,15 +9,15 @@ import './todo-list.css';
 
 export default class TodoList extends Component {
   render() {
+    // console.log(this.props.children);
     const {
-      todos, onDone, onEdit, onDelete, actualMode, changeItemText,
+      todos, onDone, onEdit, onDelete, actualMode, changeItemText, onTimerPlay,
     } = this.props;
 
     if (actualMode === 'all') {
       const elements = todos.map((item) => {
         if (item.editing) {
           return (
-
             <li key={item.id} className="editing-li">
               <EditingInput
                 itemText={item.value}
@@ -42,6 +42,7 @@ export default class TodoList extends Component {
             <TodoListItem
               onEdit={(id) => onEdit(id)}
               onDelete={(id) => onDelete(id)}
+              onTimerPlay = {(time, id) => { onTimerPlay(time, id); }}
               // eslint-disable-next-line react/jsx-props-no-spreading
               {...item}
             />
@@ -141,6 +142,7 @@ TodoList.defaultProps = {
   onDone: () => {},
   onEdit: () => {},
   onDelete: () => {},
+  onTimerPlay: () => {},
 };
 
 TodoList.propTypes = {
@@ -157,4 +159,5 @@ TodoList.propTypes = {
   onDelete: PropTypes.func,
   actualMode: PropTypes.string.isRequired,
   changeItemText: PropTypes.func.isRequired,
+  onTimerPlay: PropTypes.func.isRequired,
 };

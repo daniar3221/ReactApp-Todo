@@ -11,16 +11,10 @@ export default class EditingInput extends Component {
     this.onSubmitEnter = (e) => {
       if (e.key === 'Enter') {
         editItemText(this.state.value, itemId);
-        this.setState({
-          value: '',
-        });
       }
     };
     this.onSubmitButton = () => {
       editItemText(this.state.value, itemId);
-      this.setState({
-        value: '',
-      });
     };
     this.onLabelChange = (e) => {
       this.setState({

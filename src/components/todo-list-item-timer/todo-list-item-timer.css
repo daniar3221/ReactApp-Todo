@@ -1,0 +1,23 @@
+.todo-list-item-timer{
+    position: absolute;
+    left: 240px;
+    bottom: 12px;
+}
+.todo-list-item-timer button{
+    margin-right: 0px;
+    background-color: inherit;
+    border: none;
+    color: rgba(227, 6, 6, 0.521);
+}
+.todo-list-item-timer button:hover{
+    color: rgba(183, 7, 7, 0.795);
+}
+.minutes{
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 1px;
+}
+.seconds{
+    display: inline-block;
+    margin-left: 1px;
+}

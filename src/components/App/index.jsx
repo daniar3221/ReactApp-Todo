@@ -15,6 +15,10 @@ export default class App extends Component {
         editing: false,
         date: new Date('2022-06-01'),
         done: false,
+        time: {
+          minutes: 10,
+          seconds: 22,
+        },
       },
       {
         id: '2',
@@ -22,6 +26,10 @@ export default class App extends Component {
         editing: false,
         date: new Date('2022-07-26'),
         done: false,
+        time: {
+          minutes: 3,
+          seconds: 40,
+        },
       },
       {
         id: '3',
@@ -29,6 +37,10 @@ export default class App extends Component {
         editing: false,
         date: new Date('2022-07-28'),
         done: false,
+        time: {
+          minutes: 7,
+          seconds: 30,
+        },
       },
     ],
     actualButton: 'all',
@@ -47,20 +59,30 @@ export default class App extends Component {
     });
   };
 
-  // makeId = (id) => {
-  //   const newId = id + 1;
-  //   this.setState(({
-  //     id: newId,
-  //   }));
-  //   return newId;
-  // };
-
   changeItemText = (text, id) => {
     this.setState(({ todoData }) => {
       const editingItem = todoData.find((item) => item.id === id);
       const editingItemClone = { ...editingItem };
       editingItemClone.value = text;
       editingItemClone.editing = false;
+      const idx = todoData.findIndex((item) => item.id === id);
+      const newArray = [
+        ...todoData.slice(0, idx),
+        editingItemClone,
+        ...todoData.slice(idx + 1),
+      ];
+      return {
+        todoData: newArray,
+      };
+    });
+  };
+
+  changeTimeState = (timeState, id) => {
+    this.setState(({ todoData }) => {
+      const editingItem = todoData.find((item) => item.id === id);
+      const editingItemClone = { ...editingItem };
+      editingItemClone.time.minutes = timeState.minutes;
+      editingItemClone.time.seconds = timeState.seconds;
       const idx = todoData.findIndex((item) => item.id === id);
       const newArray = [
         ...todoData.slice(0, idx),
@@ -109,10 +131,14 @@ export default class App extends Component {
     this.setState(({ todoData }) => {
       const newItem = {
         id: Date.now().toString(),
-        value,
+        value: value.value,
         editing: false,
         date: new Date(),
         done: false,
+        time: {
+          minutes: value.time.minutes ? value.time.minutes : 10,
+          seconds: value.time.seconds ? value.time.seconds : 0,
+        },
       };
       const newArray = [
         ...todoData,
@@ -143,6 +169,7 @@ export default class App extends Component {
   };
 
   render() {
+    console.log(this.state.todoData);
     const { todoData, actualButton } = { ...this.state };
 
     const leftCount = todoData.filter((item) => item.done !== true).length;
@@ -150,7 +177,9 @@ export default class App extends Component {
     return (
       <div className="app">
         <TodoHeader />
-        <TodoInput getValue={(value) => { this.addItem(value); }} />
+        <TodoInput getValue={(value) => {
+          this.addItem(value);
+        }} />
         <TodoList
           actualMode={actualButton}
           changeItemText={(text, id) => this.changeItemText(text, id)}
@@ -158,6 +187,7 @@ export default class App extends Component {
           todos={todoData}
           onDone={(id) => this.changeDoneItem(id)}
           onDelete={(id) => this.deleteItem(id)}
+          onTimerPlay = {(timer, id) => this.changeTimeState(timer, id)}
         />
         <TodoFooter
           deleteAllCompleted={() => this.deleteAllCompleted()}
