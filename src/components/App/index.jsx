@@ -169,7 +169,6 @@ export default class App extends Component {
   };
 
   render() {
-    console.log(this.state.todoData);
     const { todoData, actualButton } = { ...this.state };
 
     const leftCount = todoData.filter((item) => item.done !== true).length;
