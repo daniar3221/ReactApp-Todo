@@ -1,2 +1,2 @@
 Vercel link
-https://todo-timer-hazel.vercel.app/
+https://react-todo-timer.vercel.app/
