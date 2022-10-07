@@ -1,47 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './editing-input.css';
 import PropTypes from 'prop-types';
 
-export default class EditingInput extends Component {
-  constructor({ itemText, itemId, editItemText }) {
-    super();
-    this.state = {
-      value: itemText,
-    };
-    this.onSubmitEnter = (e) => {
-      if (e.key === 'Enter') {
-        editItemText(this.state.value, itemId);
-      }
-    };
-    this.onSubmitButton = () => {
-      editItemText(this.state.value, itemId);
-    };
-    this.onLabelChange = (e) => {
-      this.setState({
-        value: e.target.value,
-      });
-    };
-  }
+const EditingInput = ({ itemText, itemId, editItemText }) => {
+  const [value, setValue] = useState(itemText);
 
-  render() {
-    const { value } = this.state;
-    return (
+  const onSubmitEnter = (e) => {
+    if (e.key === 'Enter') {
+      editItemText(value, itemId);
+    }
+  };
+  const onSubmitButton = () => {
+    editItemText(value, itemId);
+  };
+  const onLabelChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  return (
       <div>
         <input
-          onKeyDown={this.onSubmitEnter}
-          onChange={this.onLabelChange}
+          onKeyDown={onSubmitEnter}
+          onChange={onLabelChange}
           className="editing-input"
           placeholder="Type something to change..."
           value={value}
         />
         <button type='button' className='check-button'
-        onClick={this.onSubmitButton}>
+        onClick={onSubmitButton}>
                 <i className="fa-solid fa-check" />
         </button>
       </div>
-    );
-  }
-}
+  );
+};
 
 EditingInput.defaultProps = {
   itemText: '',
@@ -54,3 +45,5 @@ EditingInput.propTypes = {
   itemId: PropTypes.string,
   editItemText: PropTypes.func,
 };
+
+export default EditingInput;

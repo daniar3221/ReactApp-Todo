@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import EditingInput from '../Editing-input';
@@ -7,17 +7,13 @@ import TodoListItem from '../Todo-list-item';
 
 import './todo-list.css';
 
-export default class TodoList extends Component {
-  render() {
-    // console.log(this.props.children);
-    const {
-      todos, onDone, onEdit, onDelete, actualMode, changeItemText, onTimerPlay,
-    } = this.props;
-
-    if (actualMode === 'all') {
-      const elements = todos.map((item) => {
-        if (item.editing) {
-          return (
+export default function TodoList({
+  todos, onDone, onEdit, onDelete, actualMode, changeItemText, onTimerPlay,
+}) {
+  if (actualMode === 'all') {
+    const elements = todos.map((item) => {
+      if (item.editing) {
+        return (
             <li key={item.id} className="editing-li">
               <EditingInput
                 itemText={item.value}
@@ -25,10 +21,10 @@ export default class TodoList extends Component {
                 editItemText={(text, id) => changeItemText(text, id)}
               />
             </li>
-          );
-        }
+        );
+      }
 
-        return (
+      return (
           <li key={item.id} className="list-group-item ">
             <div className="round">
               <input
@@ -47,18 +43,18 @@ export default class TodoList extends Component {
               {...item}
             />
           </li>
-        );
-      });
-      return (
+      );
+    });
+    return (
         <ul className="todo-list list-group ">
           {elements}
         </ul>
-      );
-    } if (actualMode === 'active') {
-      const activeElements = todos.filter((item) => !item.done);
-      const elements = activeElements.map((item) => {
-        if (item.editing) {
-          return (
+    );
+  } if (actualMode === 'active') {
+    const activeElements = todos.filter((item) => !item.done);
+    const elements = activeElements.map((item) => {
+      if (item.editing) {
+        return (
 
             <li key={item.id} className="editing-li">
               <EditingInput
@@ -67,10 +63,10 @@ export default class TodoList extends Component {
                 editItemText={(text, id) => changeItemText(text, id)}
               />
             </li>
-          );
-        }
+        );
+      }
 
-        return (
+      return (
           <li key={item.id} className="list-group-item ">
             <div className="round">
               <input
@@ -87,18 +83,18 @@ export default class TodoList extends Component {
               {...item}
             />
           </li>
-        );
-      });
-      return (
+      );
+    });
+    return (
         <ul className="todo-list list-group ">
           {elements}
         </ul>
-      );
-    } if (actualMode === 'completed') {
-      const activeElements = todos.filter((item) => item.done === true);
-      const elements = activeElements.map((item) => {
-        if (item.editing) {
-          return (
+    );
+  } if (actualMode === 'completed') {
+    const activeElements = todos.filter((item) => item.done === true);
+    const elements = activeElements.map((item) => {
+      if (item.editing) {
+        return (
 
             <li key={item.id} className="editing-li">
               <EditingInput
@@ -107,10 +103,10 @@ export default class TodoList extends Component {
                 editItemText={(text, id) => changeItemText(text, id)}
               />
             </li>
-          );
-        }
+        );
+      }
 
-        return (
+      return (
           <li key={item.id} className="list-group-item ">
             <div className="round">
               <input
@@ -127,16 +123,16 @@ export default class TodoList extends Component {
               {...item}
             />
           </li>
-        );
-      });
-      return (
+      );
+    });
+    return (
         <ul className="todo-list list-group ">
           {elements}
         </ul>
-      );
-    }
+    );
   }
 }
+
 TodoList.defaultProps = {
   todos: [],
   onDone: () => {},

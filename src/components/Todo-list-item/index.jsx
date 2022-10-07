@@ -1,83 +1,61 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable class-methods-use-this */
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './todo-list-item.css';
 import { formatDistance } from 'date-fns';
 import PropTypes from 'prop-types';
+
 import TodoListItemTimer from '../todo-list-item-timer';
 
-class TodoListItem extends Component {
-  state = {
-    timer: {
-      minutes: this.props.time.minutes,
-      seconds: this.props.time.seconds,
-    },
-    play: false,
-  };
+const TodoListItem = ({
+  value, date, done, onDelete, onEdit, id, time, onTimerPlay,
+}) => {
+  const [play, setPlay] = useState(false);
 
-  itemStyle = (done) => ({
+  const [lTimer, setLTimer] = useState(setInterval(() => {}));
+
+  const itemStyle = (itemDone) => ({
     fontSize: '17px',
-    textDecoration: done ? 'line-through' : 'none',
+    textDecoration: itemDone ? 'line-through' : 'none',
   });
 
-  setTimer = () => {
-    let { minutes, seconds } = this.state.timer;
-    this.setState({ play: true });
-    this.timer = setInterval(() => {
-      if (minutes === 0 && seconds === 0) this.stopTimer();
-      else if (minutes > 0 && seconds === 0) {
-        minutes -= 1;
-        seconds = 59;
-        this.setState({
-          timer: {
-            minutes,
-            seconds,
-          },
-        });
-      } else if (minutes > 0 && seconds > 0) {
-        seconds -= 1;
-        this.setState({
-          timer: {
-            minutes,
-            seconds,
-          },
-        });
-        if (minutes === 0 && seconds === 0) this.stopTimer();
-      } else if (seconds > 0) {
-        seconds -= 1;
-        this.setState({
-          timer: {
-            minutes,
-            seconds,
-          },
-        });
-        if (minutes === 0 && seconds === 0) this.stopTimer();
-      }
-      this.props.onTimerPlay(this.state.timer, this.props.id);
-    }, 1000);
+  const stopTimer = () => {
+    clearInterval(lTimer);
   };
 
-  stopTimer = () => {
-    this.setState({ play: false });
-    clearInterval(this.timer);
-  };
+  const setTimer1 = () => setLTimer(setInterval(() => {
+    if (time.minutes === 0 && time.seconds === 0) stopTimer();
+    else if (time.minutes > 0 && time.seconds === 0) {
+      onTimerPlay({
+        minutes: time.minutes - 1,
+        seconds: 59,
+      }, id);
+    } else if (time.minutes > 0 && time.seconds > 0) {
+      onTimerPlay({
+        minutes: time.minutes,
+        seconds: time.seconds - 1,
+      }, id);
+      if (time.minutes === 0 && time.seconds === 0) stopTimer();
+    } else if (time.seconds > 0) {
+      onTimerPlay({
+        minutes: time.minutes,
+        seconds: time.seconds - 1,
+      }, id);
+      if (time.minutes === 0 && time.seconds === 0) stopTimer();
+    }
+  }, 1000));
 
-  render() {
-    const {
-      value, date, done, onDelete, onEdit, id,
-    } = this.props;
-
-    const { timer, play } = this.state;
-    return (
+  return (
       <span className="todo-list-item">
-        <span className="todo-list-item-label" style={this.itemStyle(done)}>
+        <span className="todo-list-item-label" style={itemStyle(done)}>
           {value}
         </span>
 
-        <TodoListItemTimer timer = { timer }
+        <TodoListItemTimer timer = { time }
         play = {play}
-        onPlay = {this.setTimer}
-        onStop = {this.stopTimer}/>
+        onPlay = {setTimer1}
+        onStop = {stopTimer}
+        setPlay ={setPlay}/>
 
         <span className="btn-block float-end">
           <button
@@ -108,9 +86,8 @@ class TodoListItem extends Component {
         </span>
 
       </span>
-    );
-  }
-}
+  );
+};
 
 // function TodoListItem({
 //   value, date, done, onDelete, onEdit, id,
@@ -129,7 +106,12 @@ TodoListItem.propTypes = {
   done: PropTypes.bool.isRequired,
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
+  onTimerPlay: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
+  time: PropTypes.shape({
+    minutes: PropTypes.number,
+    seconds: PropTypes.number,
+  }),
 };
 
 export default TodoListItem;

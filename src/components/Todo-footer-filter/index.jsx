@@ -1,25 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './todo-footer-filter.css';
 import PropTypes from 'prop-types';
 
-export default class TodoFooterFilter extends Component {
-  changeActiveStyle = (indexButton) => {
-    this.buttons = document.querySelectorAll('.btn-filter');
-    const btnArr = [...this.buttons];
+const TodoFooterFilter = ({ actualButton }) => {
+  const changeActiveStyle = (indexButton) => {
+    const buttons = document.querySelectorAll('.btn-filter');
+    const btnArr = [...buttons];
     btnArr.map((item) => item.classList.remove('active'));
     btnArr[indexButton].classList.add('active');
   };
 
-  render() {
-    const { actualButton } = this.props;
-
-    return (
+  return (
       <span className="todo-footer-filter">
         <button
           type="button"
           className="btn btn-filter btn-outline-danger active"
           onClick={() => {
-            this.changeActiveStyle(0);
+            changeActiveStyle(0);
             actualButton('all');
           }}
         >
@@ -29,7 +26,7 @@ export default class TodoFooterFilter extends Component {
           type="button"
           className="btn btn-filter btn-outline-danger"
           onClick={() => {
-            this.changeActiveStyle(1);
+            changeActiveStyle(1);
             actualButton('active');
           }}
         >
@@ -39,17 +36,18 @@ export default class TodoFooterFilter extends Component {
           type="button"
           className="btn btn-filter btn-outline-danger"
           onClick={() => {
-            this.changeActiveStyle(2);
+            changeActiveStyle(2);
             actualButton('completed');
           }}
         >
           Completed
         </button>
       </span>
-    );
-  }
-}
+  );
+};
 
 TodoFooterFilter.propTypes = {
   actualButton: PropTypes.func.isRequired,
 };
+
+export default TodoFooterFilter;
